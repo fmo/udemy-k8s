@@ -1,0 +1,50 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifest:
+      - ./k8s/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: fmo/udemy-games
+      context: udemy-games
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.php'
+            dest: .
+          - src: 'config/**/*.yaml'
+            dest: .
+    - image: fmo/udemy-guesses
+      context: udemy-guesses
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.php'
+            dest: .
+          - src: 'config/**/*.yaml'
+            dest: .
+    - image: fmo/udemy-query
+      context: udemy-query
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.php'
+            dest: .
+          - src: 'config/**/*.yaml'
+            dest: .
+    - image: fmo/udemy-stats
+      context: udemy-stats
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.php'
+            dest: .
+          - src: 'config/**/*.yaml'
+            dest: .
