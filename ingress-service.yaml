@@ -9,10 +9,38 @@ spec:
     - host: guess.com
       http:
         paths:
+          - path: /api/games
+            pathType: Prefix
+            backend:
+              service:
+                name: games-service
+                port:
+                  number: 8000
           - path: /games
             pathType: Prefix
             backend:
               service:
                 name: client-service
+                port:
+                  number: 8000
+          - path: /matches
+            pathType: Prefix
+            backend:
+              service:
+                name: query-service
+                port:
+                  number: 8000
+          - path: /leaderboard
+            pathType: Prefix
+            backend:
+              service:
+                name: query-service
+                port:
+                  number: 8000
+          - path: /api/guesses
+            pathType: Prefix
+            backend:
+              service:
+                name: guesses-service
                 port:
                   number: 8000
